@@ -41,7 +41,7 @@ class DBStorage():
         from models.review import Review
 
         """Add all available instances to a dict"""
-        classes = [State, City]
+        classes = [State, City, User, Place, Review, Amenity]
 
         """If no class is specified, return all objects in the session.
         If a class is specified, query only for objects of that class
@@ -61,7 +61,7 @@ class DBStorage():
             for obj in query:
                 key = f"{type(obj).__name__}.{obj.id}"
                 objects[key] = obj
-                
+
         return objects
 
     def new(self, obj):
@@ -86,6 +86,10 @@ class DBStorage():
 
         from models.state import State
         from models.city import City
+        from models.user import User
+        from models.place import Place
+        from models.review import Review
+        from models.amenity import Amenity
         from models.base_model import Base
 
         Base.metadata.create_all(self.__engine)
@@ -97,4 +101,3 @@ class DBStorage():
         """Method to end a session"""
 
         self.__session.close()
-
