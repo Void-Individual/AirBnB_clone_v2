@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ Console Module """
 
-import shlex
 import cmd
 import sys
 from models.base_model import BaseModel
@@ -129,13 +128,12 @@ class HBNBCommand(cmd.Cmd):
                     return
                 else:
                     new_instance = self.classes[arg]()
-                    storage.save()
                     continue
 
             key_name, val = arg.split('=')
-            if val.startswith('"'):
-                value = val.replace('_', ' ')
-                print(value)
+            if val.startswith('"') and val.endswith('"'):
+                value = val[1:-1]
+                value = value.replace('_', ' ')
             elif '.' in val:
                 decimal = val.split('.', 2)
                 if len(val) > 2:
@@ -144,10 +142,9 @@ class HBNBCommand(cmd.Cmd):
                     value = val
             else:
                 value = val
-            call = f"{args[0]} {new_instance.id} {key_name} {value}"
-            self.do_update(call)
+            setattr(new_instance, key_name, value)
+        new_instance.save()
         print(new_instance.id)
-        storage.save()
 
     def help_create(self):
         """ Help information for the create method """
@@ -229,11 +226,11 @@ class HBNBCommand(cmd.Cmd):
             if args not in self.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all().items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all().items():
                 print_list.append(str(v))
 
         print(print_list)
@@ -246,7 +243,7 @@ class HBNBCommand(cmd.Cmd):
     def do_count(self, args):
         """Count current number of class instances"""
         count = 0
-        for k, v in storage._FileStorage__objects.items():
+        for k, v in storage.all().items():
             if args == k.split('.')[0]:
                 count += 1
         print(count)
