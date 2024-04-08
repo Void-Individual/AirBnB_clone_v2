@@ -40,6 +40,7 @@ def do_deploy(archive_path):
         # Create a new one to the desired location
         run(f'ln -s /data/web_static/releases/{foldername}'
             ' /data/web_static/current')
+        print("New version deployed!")
 
         return True
 
