@@ -38,8 +38,8 @@ def do_deploy(archive_path):
         # Delete the current symlink
         run('rm -rf /data/web_static/current')
         # Create a new one to the desired location
-        run(f'ln -s /data/web_static/releases/{foldername} /data\
-            /web_static/current')
+        run(f'ln -s /data/web_static/releases/{foldername}'
+            ' /data/web_static/current')
 
         return True
 
