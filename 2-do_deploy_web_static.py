@@ -4,9 +4,9 @@
 from fabric.api import run, env, put
 from os.path import exists
 
-
 env.user = "ubuntu"
 env.hosts = ['52.91.151.166', '35.174.211.254']
+
 
 def do_deploy(archive_path):
     """A function to distribute an archive to a remote server"""
@@ -29,8 +29,12 @@ def do_deploy(archive_path):
         run('tar -xzf /tmp/{} -C /data/web_static/releases/{}/'.format(filename, foldername))
         # Delete the transferred archive
         run('rm -rf /tmp/{}'.format(filename))
+        # Move the extracted files to the newfolder created
+        run(f'mv /data/web_static/releases/{foldername}/web_static/* /data/web_static/releases/{foldername}/')
+        # Delete the now empty folder
+        run('rm -rf /data/web_static/releases/{foldername}/web_static/')
         # Delete the current symlink
-        run('rm /data/web_static/current')
+        run('rm -rf /data/web_static/current')
         # Create a new one to the desired location
         run(f'ln -s /data/web_static/releases/{foldername} /data/web_static/current')
 
