@@ -26,17 +26,20 @@ def do_deploy(archive_path):
         # Create the location to extract it to if it doesn't exist
         run('mkdir -p /data/web_static/releases/{}'.format(foldername))
         # Extract the compressed file to the desired location
-        run('tar -xzf /tmp/{} -C /data/web_static/releases/{}/'.format(filename, foldername))
+        run('tar -xzf /tmp/{} -C /data/web_static/releases/{}/'.format(
+            filename, foldername))
         # Delete the transferred archive
         run('rm -rf /tmp/{}'.format(filename))
         # Move the extracted files to the newfolder created
-        run(f'mv /data/web_static/releases/{foldername}/web_static/* /data/web_static/releases/{foldername}/')
+        run(f'mv /data/web_static/releases/{foldername}/web_static/*\
+            /data/web_static/releases/{foldername}/')
         # Delete the now empty folder
         run('rm -rf /data/web_static/releases/{foldername}/web_static/')
         # Delete the current symlink
         run('rm -rf /data/web_static/current')
         # Create a new one to the desired location
-        run(f'ln -s /data/web_static/releases/{foldername} /data/web_static/current')
+        run(f'ln -s /data/web_static/releases/{foldername} /data\
+            /web_static/current')
 
         return True
 
