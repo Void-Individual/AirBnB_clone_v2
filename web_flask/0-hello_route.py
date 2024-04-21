@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# A script that starts a flask web app
+""" A script that starts a flask web app """
 
 from flask import Flask
 app = Flask(__name__)
@@ -9,6 +9,7 @@ app = Flask(__name__)
 def start():
     # Function for the index call
     return "Hello HBNB!"
+
 
 if __name__ == '__main__':
     app.run(debug=True)
