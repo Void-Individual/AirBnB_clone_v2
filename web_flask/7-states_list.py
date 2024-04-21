@@ -16,5 +16,8 @@ def close_the_db(exception=None):
 def states_list():
     # Function to display html page full of states
     from models.state import State
-    states = storage.all(State)
+    states = storage.all(State).values()
     return render_template('7-states_list.html', states=states)
+
+if __name__ == '__main__':
+    app.run(debug=True)
