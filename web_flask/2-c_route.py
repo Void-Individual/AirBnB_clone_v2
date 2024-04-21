@@ -21,7 +21,7 @@ def hbnb():
 @app.route('/c/<text>', strict_slashes=False)
 def C_text(text):
     # Function to display a page after /c
-    return f"C {text}"
+    return f"C {text.replace('_', ' ')}"
 
 
 if __name__ == '__main__':
