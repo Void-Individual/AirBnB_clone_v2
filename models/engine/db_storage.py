@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 """Module containing the new engine for hbnb"""
 
+import sys
 from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
+
 
 class DBStorage():
     """Storage engine for the hbnb console"""
@@ -18,8 +20,6 @@ class DBStorage():
         host = getenv('HBNB_MYSQL_HOST', 'localhost')
         db = getenv('HBNB_MYSQL_DB')
         env = getenv('HBNB_ENV')
-        print("mysql+mysqldb://{}:{}@{}/{}"
-                                      .format(user, pwd, host, db))
         self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}"
                                       .format(user, pwd, host, db),
                                       pool_pre_ping=True)
@@ -82,7 +82,6 @@ class DBStorage():
 
     def reload(self):
         """Used to create the current db session"""
-
 
         from models.state import State
         from models.city import City
