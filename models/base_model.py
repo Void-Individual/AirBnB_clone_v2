@@ -30,12 +30,12 @@ class BaseModel():
                 kwargs['updated_at'] = datetime.now()
             else:
                 kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
+                                                        '%Y-%m-%dT%H:%M:%S.%f')
             if kwargs.get('created_at') is None:
                 kwargs['created_at'] = datetime.now()
             else:
                 kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
+                                                        '%Y-%m-%dT%H:%M:%S.%f')
             kwargs.pop('__class__', None)
             self.__dict__.update(kwargs)
 
@@ -45,7 +45,7 @@ class BaseModel():
         dic = {}
         dic.update(self.__dict__)
         if '_sa_instance_state' in dic:
-            del(dic['_sa_instance_state'])
+            del (dic['_sa_instance_state'])
         return '[{}] ({}) {}'.format(cls, self.id, dic)
 
     def save(self):
@@ -63,7 +63,7 @@ class BaseModel():
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
         if '_sa_instance_state' in dictionary:
-            del(dictionary['_sa_instance_state'])
+            del (dictionary['_sa_instance_state'])
         return dictionary
 
     def delete(self):

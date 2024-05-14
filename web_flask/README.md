@@ -10,5 +10,7 @@
 - templates/5-number.html: html file for the corresponding task
 - 6-number_odd_or_even.py: /number_odd_or_even/<n>: display a HTML page only if n is an integer
 - templates/6-number_odd_or_even.html; html file for the corresponding task
-- 7-states_list.py: 
+- 7-states_list.py: /states_list: display a HTML page: (inside the tag BODY)
 - web_flask/templates/7-states_list.html:html file for the corresponding file
+- 8-cities_by_states.py: /cities_by_states: display a HTML page: (inside the tag BODY)
+- web_flask/templates/8-cities_by_states.html: corresponding html page.

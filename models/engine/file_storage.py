@@ -52,7 +52,7 @@ class FileStorage:
             with open(self.__file_path, 'r') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
-                        self.all()[key] = classes[val['__class__']](**val)
+                    self.all()[key] = classes[val['__class__']](**val)
         except Exception:
             pass
 
@@ -65,7 +65,7 @@ class FileStorage:
 
         for key in self.__objects:
             if self.__objects[key] == obj:
-                del(self.__objects[key])
+                del (self.__objects[key])
                 break
         self.save()
 
